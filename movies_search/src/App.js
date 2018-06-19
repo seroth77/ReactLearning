@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import logo from './logo.svg';
 // import './App.css';
 
 class App extends Component {
@@ -8,11 +7,7 @@ class App extends Component {
       <div className="App">
         <div className="row">
           <div className="col-sm-12">
-            <div className="row">
-              <div className="row-sm-6">
-                <i className="fa fa-film"></i>
-              </div>
-            </div>
+            <i className="fa fa-film"></i> cell 1
           </div>
         </div>
         <div className="row">

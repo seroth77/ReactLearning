@@ -6,7 +6,7 @@ class MovieRow extends React.Component {
     <div className="col-sm-12">
       <div className="row">
         <div className="col-sm-3">
-          <img width="100px" alt="poster" src={this.props.movie.poster_path} />
+          <img width="100px" alt="poster" src={this.props.movie.poster_src} />
         </div>
         <div className="col-sm-9">
           <div className="App-Movie-Info-Header">

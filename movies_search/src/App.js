@@ -6,46 +6,15 @@ import $ from 'jquery';
 class App extends Component {
   constructor(props) {
     super(props);
-    // console.log('This is my initializer');
+
     this.state = {};
 
-    // const movies = [
-    //   {
-    //     id: 0, 
-    //     title: 'Avengers', 
-    //     overview: 'things happen that are bad with the Sha\'tari',
-    //     posterPath: 'https://m.media-amazon.com/images/M/MV5BNDYxNjQyMjAtNTdiOS00NGYwLWFmNTAtNThmYjU5ZGI2YTI1XkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_SY1000_CR0,0,675,1000_AL_.jpg'
-    //   },
-    //   {
-    //     id: 1, 
-    //     title: 'Avengers Age of Ultron', 
-    //     overview: 'things happen that are bad with robots',
-    //     posterPath: 'https://m.media-amazon.com/images/M/MV5BMTM4OGJmNWMtOTM4Ni00NTE3LTg3MDItZmQxYjc4N2JhNmUxXkEyXkFqcGdeQXVyNTgzMDMzMTg@._V1_SY1000_SX675_AL_.jpg'
-    //   },
-    //   {
-    //     id: 2,
-    //     title: 'Avengers Infinity War', 
-    //     overview: 'things happen that are bad with a glove',
-    //     posterPath: 'https://m.media-amazon.com/images/M/MV5BMjMxNjY2MDU1OV5BMl5BanBnXkFtZTgwNzY1MTUwNTM@._V1_SY1000_CR0,0,674,1000_AL_.jpg'
-    //   }
-    // ];
-
-    // var movieRows = [];
-
-    // movies.forEach((movie) => {
-    //   const movieRow = <MovieRow movie={movie} />;
-      
-    //   movieRows.push(movieRow);
-    // });
-
-    // this.state = {rows: movieRows};
-
-    this.performSearch();
+    this.performSearch('avengers');
   }
 
-  performSearch() {
+  performSearch(searchTerm) {
     console.log('Perform search using moviedb');
-    const uri = 'https://api.themoviedb.org/3/search/movie?query=Marvel&include_adult=false&page=1&language=en-US&api_key=d8b6062dd63e4a24a130692e4ac0d06c';
+    const uri = 'https://api.themoviedb.org/3/search/movie?include_adult=false&page=1&language=en-US&api_key=d8b6062dd63e4a24a130692e4ac0d06c&query=' + searchTerm;
     $.ajax({
       url: uri,
       method: 'GET',
@@ -57,7 +26,8 @@ class App extends Component {
 
         results.forEach((movie) => {
           console.log(movie);
-          const movieRow = <MovieRow movie={movie} />;
+          movie.poster_src = 'https://image.tmdb.org/t/p/w185' + movie.poster_path;
+          const movieRow = <MovieRow key={movie.id} movie={movie} />;
           movieRows.push(movieRow);
         });
 
@@ -67,6 +37,11 @@ class App extends Component {
         console.error("failed to fetch data");
       }
     });
+  }
+
+  searchChangedHandler(e) {
+    console.log(e.target.value);
+    this.performSearch(e.target.value);
   }
 
   render() {
@@ -82,7 +57,7 @@ class App extends Component {
         </div>
 
         <div className="App-Movie-Search">
-          <input placeholder="Enter search term" />
+          <input placeholder="Enter search term" onChange={this.searchChangedHandler.bind(this)} />
         </div>
 
       {this.state.rows}        

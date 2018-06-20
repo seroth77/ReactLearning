@@ -1,6 +1,22 @@
 .App {
   text-align: center;
 }
+.App .App-Header {
+  background-color: black;
+  color: white;
+}
+.App .App-Header .fa-film {
+  font-size: 26px;
+  padding-right: 10px;
+  color: green;
+}
+.App .App-Header h3 {
+  display: inline;
+}
+.App .App-Movie-Search input {
+  width: 100%;
+  font-size: 24px;
+}
 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import '@progress/kendo-theme-bootstrap/dist/all.css';
 import './styles/css/App.css';
 import MovieRow from './MovieRow.js';
 import $ from 'jquery';
